@@ -2,7 +2,7 @@
 
 const _ = require('lodash')
 const mongoose = require('mongoose')
-const DatastoreTrailpack = require('trailpack-datastore')
+const DatastoreTrailpack = require('trailpack/datastore')
 const lib = require('./lib')
 
 /**
@@ -15,7 +15,7 @@ module.exports = class MongooseTrailpack extends DatastoreTrailpack {
    * Ensure that this trailpack supports the configured migration
    */
   validate () {
-    if (!_.includes([ 'none', 'drop', 'create' ], this.app.config.database.models.migrate)) {
+    if (!_.includes(['none', 'drop', 'create'], this.app.config.get('database.models.migrate'))) {
       throw new Error('Migrate must be configured to either "create" or "drop"')
     }
   }
